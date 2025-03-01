@@ -279,7 +279,6 @@ class ASCIIHexDecode:
           PdfStreamError:
 
         """
-
         if isinstance(data, str):
             data = data.encode()
         retval = b""
