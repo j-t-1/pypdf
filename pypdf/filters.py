@@ -262,7 +262,6 @@ class ASCIIHexDecode:
     @staticmethod
     def decode(
         data: Union[str, bytes],
-        decode_parms: Optional[DictionaryObject] = None,
         **kwargs: Any,
     ) -> bytes:
         """
@@ -271,8 +270,6 @@ class ASCIIHexDecode:
         Args:
           data: a str sequence of hexadecimal-encoded values to be
             converted into a base-7 ASCII string
-          decode_parms: a string conversion in base-7 ASCII, where each of its values
-            v is such that 0 <= ord(v) <= 127.
 
         Returns:
           A string conversion in base-7 ASCII, where each of its values
@@ -282,7 +279,6 @@ class ASCIIHexDecode:
           PdfStreamError:
 
         """
-        # decode_parms is unused here
 
         if isinstance(data, str):
             data = data.encode()
@@ -327,7 +323,6 @@ class RunLengthDecode:
     @staticmethod
     def decode(
         data: bytes,
-        decode_parms: Optional[DictionaryObject] = None,
         **kwargs: Any,
     ) -> bytes:
         """
@@ -335,7 +330,6 @@ class RunLengthDecode:
 
         Args:
           data: a bytes sequence of length/data
-          decode_parms: ignored.
 
         Returns:
           A bytes decompressed sequence.
@@ -431,7 +425,6 @@ class ASCII85Decode:
     @staticmethod
     def decode(
         data: Union[str, bytes],
-        decode_parms: Optional[DictionaryObject] = None,
         **kwargs: Any,
     ) -> bytes:
         """
@@ -439,7 +432,6 @@ class ASCII85Decode:
 
         Args:
           data: ``bytes`` or ``str`` text to decode.
-          decode_parms: a dictionary of parameter values.
 
         Returns:
           decoded data.
@@ -472,10 +464,8 @@ class JPXDecode:
     @staticmethod
     def decode(
         data: bytes,
-        decode_parms: Optional[DictionaryObject] = None,
         **kwargs: Any,
     ) -> bytes:
-        # decode_parms is unused here
         return data
 
 
