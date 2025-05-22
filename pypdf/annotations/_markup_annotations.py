@@ -210,6 +210,7 @@ class PolyLine(MarkupAnnotation):
 
 
 class Rectangle(MarkupAnnotation):
+    deprecate_with_replacement("Rectangle", "Square", "6.0.0")
     def __init__(
         self,
         rect: Union[RectangleObject, Tuple[float, float, float, float]],
@@ -217,7 +218,6 @@ class Rectangle(MarkupAnnotation):
         interior_color: Optional[str] = None,
         **kwargs: Any,
     ) -> None:
-        deprecate_with_replacement("Rectangle", "Square", "6.0.0")
         if "interiour_color" in kwargs:
             deprecation_with_replacement("interiour_color", "interior_color", "5.0.0")
             interior_color = kwargs["interiour_color"]
