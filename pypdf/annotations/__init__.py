@@ -21,6 +21,7 @@ from ._markup_annotations import (
     Polygon,
     PolyLine,
     Rectangle,
+    Square,
     Text,
 )
 from ._non_markup_annotations import Link, Popup
@@ -38,5 +39,6 @@ __all__ = [
     "Polygon",
     "Popup",
     "Rectangle",
+    "Square",
     "Text",
 ]
