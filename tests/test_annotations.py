@@ -240,15 +240,15 @@ def test_rectangle(pdf_file_path):
     writer.add_page(page)
 
     # Act
-    with pytest.raises(DeprecationError):
-        square_annotation = Rectangle(
-            rect=(50, 550, 200, 650), interiour_color="ff0000"
-        )
-
     with pytest.warns(
         DeprecationWarning,
         match="Rectangle is deprecated and will be removed in pypdf 6.0.0. Use Square instead.",
     ):
+        square_annotation = Rectangle(
+            rect=(50, 550, 200, 650), interiour_color="ff0000"
+        )
+
+    with pytest.raises(DeprecationError):
         square_annotation = Rectangle(
             rect=(50, 550, 200, 650), interiour_color="ff0000"
         )
