@@ -217,12 +217,24 @@ class Rectangle(MarkupAnnotation):
         interior_color: Optional[str] = None,
         **kwargs: Any,
     ) -> None:
+        deprecate_with_replacement("Rectangle", "Square", "6.0.0")
         if "interiour_color" in kwargs:
             deprecation_with_replacement("interiour_color", "interior_color", "5.0.0")
             interior_color = kwargs["interiour_color"]
             del kwargs["interiour_color"]
-        deprecate_with_replacement("Rectangle", "Square", "6.0.0")
-        Square(MarkupAnnotation)
+        super().__init__(**kwargs)
+        self.update(
+            {
+                NameObject("/Type"): NameObject("/Annot"),
+                NameObject("/Subtype"): NameObject("/Square"),
+                NameObject("/Rect"): RectangleObject(rect),
+            }
+        )
+
+        if interior_color:
+            self[NameObject("/IC")] = ArrayObject(
+                [FloatObject(n) for n in hex_to_rgb(interior_color)]
+            )
 
 
 class Square(MarkupAnnotation):
