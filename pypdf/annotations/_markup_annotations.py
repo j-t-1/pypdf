@@ -2,7 +2,7 @@ import sys
 from abc import ABC
 from typing import Any, List, Optional, Tuple, Union
 
-from .._utils import deprecation_with_replacement
+from .._utils import deprecate_with_replacement, deprecation_with_replacement
 from ..constants import AnnotationFlag
 from ..generic import ArrayObject, DictionaryObject
 from ..generic._base import (
@@ -221,6 +221,18 @@ class Rectangle(MarkupAnnotation):
             deprecation_with_replacement("interiour_color", "interior_color", "5.0.0")
             interior_color = kwargs["interiour_color"]
             del kwargs["interiour_color"]
+        deprecate_with_replacement("Rectangle", "Square", "6.0.0")
+        Square(MarkupAnnotation)
+
+
+class Square(MarkupAnnotation):
+    def __init__(
+        self,
+        rect: Union[RectangleObject, Tuple[float, float, float, float]],
+        *,
+        interior_color: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(**kwargs)
         self.update(
             {
