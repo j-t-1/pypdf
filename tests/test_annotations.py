@@ -17,6 +17,7 @@ from pypdf.annotations import (
     PolyLine,
     Popup,
     Rectangle,
+    Square,
     Text,
 )
 from pypdf.errors import DeprecationError, PdfReadError
@@ -230,7 +231,7 @@ def test_line(pdf_file_path):
         writer.write(fp)
 
 
-def test_square(pdf_file_path):
+def test_rectangle(pdf_file_path):
     # Arrange
     pdf_path = RESOURCE_ROOT / "crazyones.pdf"
     reader = PdfReader(pdf_path)
@@ -244,11 +245,41 @@ def test_square(pdf_file_path):
             rect=(50, 550, 200, 650), interiour_color="ff0000"
         )
 
+    with pytest.warns(
+        DeprecationWarning,
+        match="Rectangle is deprecated and will be removed in pypdf 6.0.0. Use Square instead.",
+    ):
+        square_annotation = Rectangle(
+            rect=(50, 550, 200, 650), interiour_color="ff0000"
+        )
+    
     square_annotation = Rectangle(rect=(50, 550, 200, 650), interior_color="ff0000")
     writer.add_annotation(0, square_annotation)
 
     square_annotation = Rectangle(
         rect=(40, 400, 150, 450),
+    )
+    writer.add_annotation(0, square_annotation)
+
+    # Assert: You need to inspect the file manually
+    with open(pdf_file_path, "wb") as fp:
+        writer.write(fp)
+
+
+def test_square(pdf_file_path):
+    # Arrange
+    pdf_path = RESOURCE_ROOT / "crazyones.pdf"
+    reader = PdfReader(pdf_path)
+    page = reader.pages[0]
+    writer = PdfWriter()
+    writer.add_page(page)
+
+    # Act
+    square_annotation = Rectangle(rect=(55, 555, 205, 655), interior_color="ff0000")
+    writer.add_annotation(0, square_annotation)
+
+    square_annotation = Rectangle(
+        rect=(45, 405, 155, 455),
     )
     writer.add_annotation(0, square_annotation)
 
