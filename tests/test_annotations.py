@@ -245,7 +245,7 @@ def test_rectangle(pdf_file_path):
         match="Rectangle is deprecated and will be removed in pypdf 6.0.0. Use Square instead.",
     ):
         square_annotation = Rectangle(
-            rect=(50, 550, 200, 650), interiour_color="ff0000"
+            rect=(50, 550, 200, 650),
         )
 
     with pytest.raises(DeprecationError):
