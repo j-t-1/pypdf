@@ -255,6 +255,14 @@ def writer_operate(writer: PdfWriter) -> None:
         assert k in objects_hash, f"Missing {v}"
 
 
+def test_insert_blank_page():
+    writer = PdfWriter(clone_from=RESOURCE_ROOT / "crazyones.pdf")
+
+    old_page_count = len(writer.pages)
+    page = writer.insert_blank_page(width=10, height=20, index=len(writer.pages))
+    assert len(writer.pages) == old_page_count + 1
+
+
 @pytest.mark.parametrize(
     ("convert", "needs_cleanup"),
     [
